@@ -1,0 +1,6 @@
+
+The toJSON() method in JavaScript is used to control how objects are converted into JSON (JavaScript Object Notation) strings.
+ When you call JSON.stringify() on an object, JavaScript will look for a toJSON() method in that object to customize the JSON representation.
+  If it exists, JavaScript will use the return value of toJSON() as the JSON data instead of the object itself.
+
+  here we can restructure or omit sensitivve information

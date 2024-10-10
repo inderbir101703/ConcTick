@@ -1,0 +1,41 @@
+cookie
+whenever browser sends headers to user . it sends cookies with some values. and it storedin browser.
+and anytime we send request to server that cookie data is send in headers 
+
+
+
+JWT 
+we take some information that is payload and payload is thrown in JWT creation algo. JWT is created with info encoded in it.
+some ways to send jwt to servers.
+1. send as authorization header to server
+2. send as token in a nornmal post request
+3. send it as a cookie
+
+
+
+JWT issues with ssr 
+in csr , first there is a html request and then  there is js loading and then after js we can write jslogic to add header and make a call.
+but in ssr we need html on initialload. means server needs to send data from services. on initial hit , we need to send entire html page 
+and there is no way we can write js logic before hitting the url . so the only way is http only cookies. first request need authenication info and we
+can not modify it so we has to add jwt in a cookie.
+
+
+
+
+
+
+Cookies                     JWT
+1. transport mehanism       1. author/authen mechanism 
+2. moves any kind of data   2. stores any data
+between server and user
+3. automatically managed    3. handled manually
+by browser
+
+4. expired aby browser. user  4. itself contain feature to expire
+can still use it the data
+
+
+authenication method can not just return true or false. it also needs to return what acess does user have
+so a auth service must : must tell us details about user , their access , must be language independant(cookie differ from acess from language) , must not need database (if we set session in cookie , we need db at server to store and verifies cookies) , expire and invalidate itself
+
+

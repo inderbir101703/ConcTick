@@ -1,0 +1,12 @@
+encrypting cookies and decrypting can be cumersome . we need to inform each service about algo of encryption and dcryption.
+as we are storing jwt in cookie , no need for encryption. as jwt's are temper resistant.
+
+if jwt is tempered , with key we can detect it.
+ every service needs that key so will be storing that key in docker/kubernetes which then be shared by microapps.
+ will be creating a secret ..a kubernetes object storing our key and the secret will be exposed via env variables for each container
+
+
+ command to create secret in kubernetes(imperative way)
+ instead asdf use a complex string
+ secret name - jwt_Secret 
+ kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf
