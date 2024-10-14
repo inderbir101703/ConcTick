@@ -1,18 +1,38 @@
 import express, {Request,Response} from "express";
-import { body,validationResult } from "express-validator";
+import { body } from "express-validator";
+import jwt from "jsonwebtoken";
+import { User } from "../models/user";
+import { Password } from "../services/Password";
+import { BadRequestError } from "../errors/bad-request-error";
+import { ValidateRequest } from "../middleware/validate-request";
 const router=express.Router()
 
-router.post('/api/users/signin',[
-    body('email').isEmail().withMessage('enter valid emial'),
-    body('password').trim().isLength({min:4,max:20}).withMessage('password must between 4 and 20')]
-    ,(req:Request,res:Response)=>{
-      console.log('jpj')
- 
-        const errors=validationResult(req)
+router.post('/api/users/signin',[body('email').isEmail().withMessage('enter email'),body('password').trim().notEmpty().withMessage('must enter the password')]
+    ,
+    ValidateRequest,
+    async (req:Request,res:Response)=>{
+      const {email ,password}=req.body
+      const exisitingUser=await User.findOne({email})
 
-        if(!errors.isEmpty()){
-          throw new Error('invalid email or password') // converting from object to array
-        }
-    res.send('hi there')
+      if(!exisitingUser){
+       throw new BadRequestError('invalid details')
+      }
+      const passwordMatch=await Password.compareHash(exisitingUser.password,password)
+
+      if(!passwordMatch)
+        throw new BadRequestError('invalid details')
+
+      const usetJwt=jwt.sign({id:exisitingUser.id,
+        email:exisitingUser.email
+        // adding ! to bypass ts as we know we check this key at start of app in index.js
+       },process.env.JWT_KEY!)
+  
+      //store it on session object
+      req.session={jwt:usetJwt}
+         await exisitingUser.save()
+        res.status(200).send(exisitingUser)  
+
+  
+
 })
 export {router as signinRouter} 

@@ -10,3 +10,14 @@ if jwt is tempered , with key we can detect it.
  instead asdf use a complex string
  secret name - jwt_Secret 
  kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf
+
+
+ // how we set a type in already declared objects
+ we are not extending Request we asking ts take the already defined Request and add currentUser
+declare global{
+    namespace Express{
+        interface Request{
+            currentUser?:UserPayload
+        }
+    }
+}
