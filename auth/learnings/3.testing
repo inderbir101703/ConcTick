@@ -1,0 +1,12 @@
+to test express port directly in test cases is hard coded and cause issues if port is busy .
+super set library we can use to mock http mock
+
+so if in index app is listening on specific port we can not use 
+
+ideal setup
+index.js-> start a port on 3000
+app.js-> express app listening to any port which will support both index.js and test file
+
+
+to use multiple databases at a time , we need mongodb-memory-server
+for testing --save-dev dependencies , whenver we run our docker file these uneccesary dependecies will not be there

@@ -1,0 +1,7 @@
+auth testng\:
+we can setup jest config in either package.json or settup jest.config.json
+intial setup  mongodb memo server in setup file and use supertest to test our index.ts will only start our express and app.ts will have out app code.
+supertest is used to http calls and port mismatching on express server. that is why we separated the index and app.
+
+supertest is http only while setting secure in setting sesion true in cookie session . as cookie session is https only no cookies will be given out.
+set secure accorsing to enviroment

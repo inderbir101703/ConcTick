@@ -1,0 +1,76 @@
+_app.js
+The _app.js file is a special Next.js file that allows you to override the default App component provided by Next.js. It is used to initialize pages, persist layout across pages, and handle global CSS or other customizations.
+
+Purpose of _app.js:
+Customizing the App Component: You can use _app.js to wrap your application with additional components, such as a layout or global providers (e.g., Redux store, ThemeProvider). This custom App component will be used as the container for every page in your application.
+Persisting Layout Across Pages: Define a layout structure (e.g., header, footer) that remains consistent across different pages. This avoids duplicating layout code in every page component.
+Handling Global CSS: Import global CSS stylesheets or CSS-in-JS libraries (e.g., styled components) to ensure they are applied universally across your application.
+Example of _app.js:
+Here’s an example of how you might use _app.js to wrap your application with a layout component and apply global CSS styles:
+
+// pages/_app.js
+import React from 'react';
+import Layout from '../components/Layout';
+import '../styles/global.css'; // Import global CSS styles
+
+function MyApp({ Component, pageProps }) {
+  // Use the Layout component to wrap every page
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
+}
+
+export default MyApp;
+In this example:
+
+We import a Layout component that defines the overall structure of our application.
+We import a global CSS file (global.css) to apply styles across all pages.
+The MyApp component receives Component (the current page component) and pageProps (the props passed to the page component).
+_document.js
+The _document.js file in Next.js allows you to customize the <html>, <head>, and <body> tags of the initial HTML document rendered for your application. This is particularly useful for adding external stylesheets, meta tags, or scripts that need to be present on every page.
+
+Purpose of _document.js:
+Customizing HTML Structure: Modify the <html>, <head>, and <body> tags of the initial HTML document rendered by Next.js.
+Adding External Resources: Include external stylesheets, fonts, meta tags, or scripts that are required globally for your application.
+Server-side Rendering (SSR) Considerations: Ensure that the document structure is correctly set up for server-side rendering to match client-side hydration.
+Example of _document.js:
+Here’s an example of how you might use _document.js to customize the initial HTML document structure and include external resources:
+
+// pages/_document.js
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+
+class MyDocument extends Document {
+  render() {
+    return (
+      <Html lang="en">
+        <Head>
+          {/* Include external stylesheets or meta tags */}
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
+}
+
+export default MyDocument;
+In this example:
+
+We extend the Document class from next/document.
+We override the render() method to customize the HTML document structure.
+Inside the <Head> component, we include a link to an external stylesheet (Google Fonts) and a meta tag for responsive viewport settings.
+The <Main /> component renders the main content of the page.
+The <NextScript /> component renders additional scripts required by Next.js.
+
+
+
+
+
+getInitialProps -> nextjs runs this function when we are rednering our application on server
+we can not do any data loading inside ssr components. we cant make a reqyest ..only once rendered and returned
