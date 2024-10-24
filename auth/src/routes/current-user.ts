@@ -1,7 +1,7 @@
 import express from "express";
-import { RequireAuth } from "../middleware/requireAuth";
+import { RequireAuth } from "@tiktickets/common"
 
-import { CurrentUser } from "../middleware/current-user";
+import { CurrentUser } from "@tiktickets/common";
 const router=express.Router()
 
 router.get('/api/users/current-user',CurrentUser,RequireAuth,(req,res)=>{

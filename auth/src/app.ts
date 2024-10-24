@@ -6,8 +6,8 @@ import { signinRouter } from "./routes/signin";
 import { currentUserRouter } from "./routes/current-user";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
-import { NotFoundError } from "./errors/not-found-error";
-import { errorHandler } from "./middleware/error-handler";
+import { NotFoundError } from "@tiktickets/common";
+import { errorHandler } from "@tiktickets/common";
 
 
 const app=express()

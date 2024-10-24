@@ -3,8 +3,8 @@ import { body } from "express-validator";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user";
 import { Password } from "../services/Password";
-import { BadRequestError } from "../errors/bad-request-error";
-import { ValidateRequest } from "../middleware/validate-request";
+import { BadRequestError } from "@tiktickets/common";
+import { ValidateRequest } from "@tiktickets/common";
 const router=express.Router()
 
 router.post('/api/users/signin',[body('email').isEmail().withMessage('enter email'),body('password').trim().notEmpty().withMessage('must enter the password')]

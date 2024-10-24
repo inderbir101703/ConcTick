@@ -2,8 +2,8 @@ import express, {Request,Response} from "express";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user";
 import { body } from "express-validator";
-import { BadRequestError } from "../errors/bad-request-error";
-import { ValidateRequest } from "../middleware/validate-request";
+import { BadRequestError } from "@tiktickets/common";
+import { ValidateRequest } from "@tiktickets/common";
 
 const router=express.Router()
 

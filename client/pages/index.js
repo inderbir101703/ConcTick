@@ -1,9 +1,9 @@
 
 import BuildClient from '../api/buildclient'
-const App=({CurrentUser})=>{
+const App=(props)=>{
 
-   console.log(CurrentUser,'loo')
-return <h1 className='text-3xl font-bold underline'> {CurrentUser ? 'you are signedin' : 'sign in'} </h1>}
+   console.log(props,'loo')
+return <h1 className='text-3xl font-bold underline'> {props?.CurrentUser ? 'you are signedin' : 'sign in'} </h1>}
 
 
 // App.getInitialProps=async function(context) {
@@ -28,10 +28,22 @@ return <h1 className='text-3xl font-bold underline'> {CurrentUser ? 'you are sig
 //     }
 // }
 App.getInitialProps = async context => {
-   console.log('LANDING PAGE!');
+   console.log('LANDING PAGEd!',context);
    const client = BuildClient(context);
-   const { data } = await client.get('/api/users/current-user');
+      try {
+            const response = await client.get('/api/users/current-user');      
+            return {
+             ... response.data 
+            };
+          }
+          catch (err) {
+                  console.log('Error in getServerSideProps:', err.message);       
+                  return {
+                      currentUser: null
+                  };
+                }
+
  
-   return data;
+
  };
 export default App
