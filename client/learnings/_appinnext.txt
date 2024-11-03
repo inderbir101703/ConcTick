@@ -74,3 +74,31 @@ The <NextScript /> component renders additional scripts required by Next.js.
 
 getInitialProps -> nextjs runs this function when we are rednering our application on server
 we can not do any data loading inside ssr components. we cant make a reqyest ..only once rendered and returned
+
+
+getStaticProps for SSG 
+getServerProps for SSr 
+
+in _app  we can only run getInitialProps 
+
+getInitialProps can run in client and as well server side as well
+getInitialProps is executed on server when
+
+1. hard refresh
+
+2. clicking link from different domain
+
+3. typing url in address bar
+
+
+
+
+
+on CLIENT:
+
+while navigatin from one page to another while in the app
+
+
+
+getInitialProps can override getServerProps getServerProps and getInitialProps of children 
+so if we are using getInitialProps in _app we have to pass context from _app

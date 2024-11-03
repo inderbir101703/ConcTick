@@ -23,3 +23,19 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
+    - image: us.gcr.io/aerobic-inkwell-437019-k8/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+    - image: us.gcr.io/aerobic-inkwell-437019-k8/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
