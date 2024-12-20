@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: orders
-          image: us.gcr.io/aerobic-inkwell-437019-k8/orders
+          image: orders
           env: 
             - name: NATS_CLIENT_ID
               valueFrom:

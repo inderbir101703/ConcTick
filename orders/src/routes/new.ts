@@ -8,7 +8,7 @@ import { OrderCreatedPublisher } from '../events/publishers/order-created-publis
 import { natsWrapper } from '../nats-wrapper'
 
 const router=Router()
-const EXPIRATION_WINDOW_SECONDS=15*60
+const EXPIRATION_WINDOW_SECONDS=1*60
 router.post('/api/orders',RequireAuth,[body('ticketId')
     .not()
     .isEmpty()
@@ -18,7 +18,7 @@ router.post('/api/orders',RequireAuth,[body('ticketId')
     const {ticketId}=req.body
  //find the ticket user is try to find 
 const ticket=await Ticket.findById(ticketId)
-
+console.log('ticket nai mildi payi',ticket,ticketId)
 if(!ticket){
     throw new NotFoundError()
 }
@@ -48,6 +48,7 @@ await order.save()
  // emit the event and tell other services about it
  new OrderCreatedPublisher(natsWrapper.client).publish({
     id:order.id,
+    version:order.version,
     status:order.status,
     userId:order.userId,
     expiresAt:order.expiresAt.toISOString(),

@@ -1,6 +1,6 @@
 import {MongoMemoryServer} from 'mongodb-memory-server'
-import {app} from '../app'
-import request from 'supertest'
+
+
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 let mongo:any

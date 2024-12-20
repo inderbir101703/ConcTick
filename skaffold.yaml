@@ -4,10 +4,10 @@ manifests:
   rawYaml:
     - ./infra/k8s/*
 build:
-  googleCloudBuild: 
-   projectId:  aerobic-inkwell-437019-k8   
+  local:
+    push: false 
   artifacts:
-    - image: us.gcr.io/aerobic-inkwell-437019-k8/auth
+    - image: auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -15,24 +15,33 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: us.gcr.io/aerobic-inkwell-437019-k8/client
-      context: client
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: '**/*.js'
-            dest: .
-    - image: us.gcr.io/aerobic-inkwell-437019-k8/tickets
+ 
+    - image: tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: '**/*.js'
-            dest: .
-    - image: us.gcr.io/aerobic-inkwell-437019-k8/orders
+            dest: .   
+    - image: orders
       context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+    - image: expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+    - image: client
+      context: client
       docker:
         dockerfile: Dockerfile
       sync:

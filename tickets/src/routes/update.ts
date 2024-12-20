@@ -1,6 +1,6 @@
 import { Router,Response,Request } from "express";
 import { Ticket } from "../models/ticket";
-import { InvalidDetailsError, NotFoundError } from "@tiktickets/common";
+import { BadRequestError, InvalidDetailsError, NotFoundError } from "@tiktickets/common";
 import { RequireAuth,ValidateRequest } from "@tiktickets/common";
 import { body } from "express-validator";
 import { natsWrapper } from "../nats-wrapper";
@@ -26,7 +26,9 @@ router.put(
       if (!ticket) {
         throw new NotFoundError();
       }
-  
+     if(ticket.orderId){
+      throw new BadRequestError('can not edit a  reserved ticket ')
+     }
       if (ticket.userId !== req.currentUser!.id) {
         throw new InvalidDetailsError('invalid details');
       }

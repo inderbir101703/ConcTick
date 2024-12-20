@@ -1,12 +1,13 @@
 import request from 'supertest'
 import { app } from '../../app'
+import mongoose from 'mongoose'
 import { Order } from '../../models/order'
 import { Ticket } from '../../models/ticket'
 import { body } from 'express-validator'
 
 
 async function createTicket(){
-    const ticket = Ticket.build({title:'concert',price:20,    id:'asd'})
+    const ticket = Ticket.build({title:'concert',price:20,     id: new mongoose.Types.ObjectId().toHexString()})
     await ticket.save()
     return ticket
 }
