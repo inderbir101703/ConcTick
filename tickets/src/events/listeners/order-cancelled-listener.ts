@@ -5,9 +5,11 @@ import { Ticket } from "../../models/ticket";
 import { TicketUpdatedPublisher } from "../publishers/ticket-updated-pubisher";
 
 export class OrderCancelledListener extends Listener<OrderCancelledEvent>{
-subject: Subjects.orderCancelled=Subjects.orderCancelled
+subject: Subjects.OrderCancelled=Subjects.OrderCancelled
 queueGroupName: string=queGroupName
 async onMessage(data:OrderCancelledEvent['data'],msg:Message){
+
+    console.log('inside ticket aa gaye oo',data)
 const ticket = await Ticket.findById(data.ticket.id)
 
 if(!ticket)

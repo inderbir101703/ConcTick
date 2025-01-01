@@ -21,6 +21,7 @@ router.put(
     ],
     ValidateRequest,
     async (req: Request, res: Response) => {
+      console.log('value of req in update ticket',req.params)
       const ticket = await Ticket.findById(req.params.id);
   
       if (!ticket) {

@@ -1,21 +1,33 @@
-import Link from 'next/link'
-const Header =({CurrentUser})=>{
+import Link from 'next/link';
 
-    console.log('in header',CurrentUser)
-const links=[!CurrentUser && {label:'Sign In' , href:'/auth/signin'},
-    !CurrentUser &&  {label:'Sign Up' , href:'/auth/signup'},
-    CurrentUser &&  {label:'Sign Out' , href:'/auth/signout'}
-].filter((linkConfig)=>linkConfig).map(({label,href})=><Link key={href} href={href}>{label}</Link>)
-    return <nav>
-  <Link href="/">
-  Gitix
-  </Link>
-  <div className='flex flex-col justify-end'>
+export default ({ currentUser }) => {
+  const links = [
+    !currentUser && { label: 'Sign Up', href: '/auth/signup' },
+    !currentUser && { label: 'Sign In', href: '/auth/signin' },
+    currentUser && { label: 'Sell Tickets', href: '/tickets/new' },
+    currentUser && { label: 'My Orders', href: '/orders' },
+    currentUser && { label: 'Sign Out', href: '/auth/signout' },
+  ]
+    .filter((linkConfig) => linkConfig)
+    .map(({ label, href }) => {
+      return (
+        <li key={href} className="nav-item">
+          <Link className="nav-link" href={href}>
+            {label}
+          </Link>
+        </li>
+      );
+    });
 
-    <ul className='flex items-center'>
-    {links}
-    </ul>
-  </div>
+  return (
+    <nav className="navbar navbar-light bg-light">
+      <Link className="navbar-brand" href="/">
+        TikTickets
+      </Link>
+
+      <div className="d-flex justify-content-end">
+        <ul className="nav d-flex align-items-center">{links}</ul>
+      </div>
     </nav>
-}
-export default Header
+  );
+};

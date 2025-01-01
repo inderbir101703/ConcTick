@@ -1,10 +1,10 @@
 import {useState} from 'react'
 import axios from 'axios'
 const useRequest=({url,body,method,onSuccess})=>{
-  const [error,setError]=useState(null)
+  const [errors,setErrors]=useState(null)
   async function fetchData(){
     try{
-        setError(null)
+        setErrors(null)
 const response= await axios[method](url,body)
 if(onSuccess){
     console.log(response.data)
@@ -12,16 +12,16 @@ if(onSuccess){
 }
     return response
     }catch(err){
-        console.log(err)
+        console.log(err.response,'lllll')
         const errorsArray = err?.response?.data || [
             { message: 'An unexpected error occurred' }
           ];
-    setError(<ul>{errorsArray?.map((ele)=><li><h2>{ele.message}</h2>{ele?.field}</li>)} </ul>)
+    setErrors(<ul>{errorsArray?.map((ele)=><li><h2>{ele.message}</h2>{ele?.field}</li>)} </ul>)
     }
   }
 
   return {
-    error,
+    errors,
     fetchData
   }
 

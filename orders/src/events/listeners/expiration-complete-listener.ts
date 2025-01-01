@@ -8,16 +8,20 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
 queueGroupName: string=queueGroupName;
 subject: Subjects.ExpirationComplete=Subjects.ExpirationComplete;
 async onMessage(data: ExpirationCompleteEvent['data'], msg: Message) {
-    const order=await Order.findById(data.orderId)
+
+    const order=await Order.findById(data.orderId).populate('ticket');
 
     if(!order){
         throw new Error('order not found')
+    }
+    if(order.status===OrderStatus.Complete){
+        return msg.ack()
     }
     order.set({
         status:OrderStatus.Cancelled
     })
     await order.save()
-
+    console.log('ho hoh ho ho',data,order.ticket)
     // tell the world that order is cancelled
     await new OrderCancelledPublisher(this.client).publish({
         id:order.id,

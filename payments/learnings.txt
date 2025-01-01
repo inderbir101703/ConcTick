@@ -1,0 +1,10 @@
+payment service 
+we need to store 
+
+       orders
+ id 
+ status -> to check we not processing oudated one
+ version -> to get cirrect order
+ userId -> who crreated it -> make sure one user can not pay for another one
+ 
+ we dont want to store id of ticket . we only care about order and payment

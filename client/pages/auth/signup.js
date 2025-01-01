@@ -1,15 +1,15 @@
 import {useState} from 'react'
 import useRequest from '../../hooks/useRequest'
-import {useRouter} from 'next/router'
+import Router from 'next/router'
 const Signup=()=>{
 const [email,setEmail]=useState('')
 const [password,setPassword]=useState('')
-const router=useRouter()
- const{fetchData,error}=useRequest({url:'/api/users/signup',method:'post',body:{
+
+ const{fetchData,errors}=useRequest({url:'/api/users/signup',method:'post',body:{
   email:email,
   password:password
  }, 
-onSuccess:()=>router.push('/')
+onSuccess:()=>Router.push('/')
 })
 
 
@@ -17,7 +17,7 @@ onSuccess:()=>router.push('/')
     
     e.preventDefault()
     fetchData()
-    console.log(email,password,error,'inside handlinfsubmit')
+    console.log(email,password,errors,'inside handlinfsubmit')
   }
     return <div className='w-full max-w-full' >
       
@@ -38,7 +38,7 @@ setEmail(e.target.value)
     }}/>
     </div>
 
-{error}
+{errors}
     <button type='submit' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-3/6 self-center'>Submit</button>
     </form>
     </div>

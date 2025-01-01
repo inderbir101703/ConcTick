@@ -32,8 +32,9 @@ if(isReserved){
 
 //calculate an expiration time
 
-const expiration=new Date()
-expiration.setSeconds(expiration.getSeconds()+EXPIRATION_WINDOW_SECONDS)
+const expiration = new Date();
+expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
+
 
 const order =Order.build({
     userId:req.currentUser!.id,
@@ -57,6 +58,7 @@ await order.save()
         price:ticket.price
     }
  })
+ console.log('mq dwodw',  await Order.find())
     res.status(201).send(order)
 })
 

@@ -7,7 +7,7 @@ let mongo:any
 
 declare global{
     
-    var signin: () => string[];
+    var signin: (id?:string) => string[];
 }
 
 jest.mock('../nats-wrapper')
@@ -33,10 +33,10 @@ await mongo.stop()
 await mongoose.disconnect()
 })
 
-global.signin= ()=>{
+global.signin= (id?:String)=>{
 // build a jwt with payload id and email
 const payload={email:'test@test.com',
-    id: new mongoose.Types.ObjectId().toHexString()
+    id: id || new mongoose.Types.ObjectId().toHexString()
 }
 
 

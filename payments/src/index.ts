@@ -26,8 +26,8 @@ const start=async ()=>{
         })
         process.on('SIGINT',()=>{ natsWrapper.client?.close()})
         process.on('SIGTERM',()=>{ natsWrapper.client?.close()})
-        new OrderCancelledListener(natsWrapper.client).listen()
         new OrderCreatedListener(natsWrapper.client).listen()
+        new OrderCancelledListener(natsWrapper.client).listen()
 await mongoose.connect(process.env.MONGO_URI)
 console.log('connected to db')
 }

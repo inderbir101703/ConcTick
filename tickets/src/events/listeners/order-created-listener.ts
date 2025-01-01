@@ -4,7 +4,7 @@ import { Message } from "node-nats-streaming";
 import { Ticket } from "../../models/ticket";
 import { TicketUpdatedPublisher } from "../publishers/ticket-updated-pubisher";
 export class OrderCreatedListener extends Listener<OrderCreatedEvent>{
-subject: Subjects.orderCreated=Subjects.orderCreated;
+subject: Subjects.OrderCreated=Subjects.OrderCreated;
 queueGroupName=queGroupName
 async onMessage(data:OrderCreatedEvent['data'],msg:Message){
   const ticket=await Ticket.findById(data.ticket.id)  

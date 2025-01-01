@@ -11,6 +11,7 @@ interface Payload{
 })
 
 expirationQueue.process(async(job)=>{
+  console.log('expiring in que with',job.data)
   new ExpirationCompletePublisher(natsWrapper.client).publish({
     orderId:job.data.orderId,
     
