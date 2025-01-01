@@ -1,3 +1,20 @@
 microservices with react and node
 
 scaffold dev with start after you connected with docker and kubernetes
+
+in local dns change 127.0.0.1 mapping to ticketing.local
+
+
+below id and key are process variables needed for razorpay integration 
+kubectl create secret generic razorpay-key-id  --from-literal= RAZORPAY_KEY_ID=<razorpay_test_key>
+kubectl create secret generic razorpay-key-secret  --from-literal=RAZORPAY_KEY_SECRET=<razorpay_test_key_Secret>
+
+
+testing key and secret 
+razorpay_test_key: rzp_test_Ihl2G01ZxMBmQp
+razorpay_test_key_Secret: o4WGIW80fegVO1AQ69YyV2rw
+
+
+then hit this url
+https://ticketing.local/
+
