@@ -15,7 +15,7 @@ const OrderShow = ({ order,currentUser }) => {
 
   const handlePayment = async () => {
   
-  console.log( order.ticket.price*100, currentUser.email,order.id)
+
  let {orderId}=fetchData()
     const options = {
         "key": "rzp_test_Ihl2G01ZxMBmQp", // Enter the Key ID generated from the Dashboard

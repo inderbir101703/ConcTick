@@ -18,7 +18,7 @@ router.post('/api/payments',RequireAuth,ValidateRequest,[
 
 const {orderId}=req.body 
 const orders = await Order.find();
-console.log('in payments thwe order id',orderId,orders)
+
 
 const order=await Order.findById(orderId)
 if(!order){

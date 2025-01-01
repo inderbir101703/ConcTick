@@ -11,7 +11,7 @@ import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publ
     .isFloat({gt:0}).withMessage('price is invalid')
   ],ValidateRequest, async(req:Request,res:Response)=>{
 const {title,price}=req.body
-console.log(title,price,req.currentUser,'kiked')
+
 const ticket= await Ticket.build({
 title,
 price,

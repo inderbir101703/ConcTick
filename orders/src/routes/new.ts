@@ -18,7 +18,7 @@ router.post('/api/orders',RequireAuth,[body('ticketId')
     const {ticketId}=req.body
  //find the ticket user is try to find 
 const ticket=await Ticket.findById(ticketId)
-console.log('ticket nai mildi payi',ticket,ticketId)
+
 if(!ticket){
     throw new NotFoundError()
 }
@@ -58,7 +58,7 @@ await order.save()
         price:ticket.price
     }
  })
- console.log('mq dwodw',  await Order.find())
+
     res.status(201).send(order)
 })
 
