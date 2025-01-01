@@ -144,5 +144,5 @@ it('rejects of ticket is reserver', async()=>{
     .send({
       title: 'new title',
       price: 100,
-    }).expect(400)
+    }).expect(409)
 })
