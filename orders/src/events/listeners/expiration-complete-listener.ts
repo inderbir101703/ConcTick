@@ -21,7 +21,7 @@ async onMessage(data: ExpirationCompleteEvent['data'], msg: Message) {
         status:OrderStatus.Cancelled
     })
     await order.save()
-    console.log('ho hoh ho ho',data,order.ticket)
+
     // tell the world that order is cancelled
     await new OrderCancelledPublisher(this.client).publish({
         id:order.id,

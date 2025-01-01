@@ -17,7 +17,7 @@ onSuccess:()=>Router.push('/')
     
     e.preventDefault()
     fetchData()
-    console.log(email,password,errors,'inside handlinfsubmit')
+
   }
     return <div className='w-full max-w-full' >
       

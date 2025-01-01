@@ -86,7 +86,6 @@ it('updates the ticket provided valid inputs', async () => {
       title: 'asldkfj',
       price: 20,
     });
-console.log('hjhjh',response.body)
   await request(app)
     .put(`/api/tickets/${response.body.id}`)
     .set('Cookie', cookie)
@@ -145,5 +144,5 @@ it('rejects of ticket is reserver', async()=>{
     .send({
       title: 'new title',
       price: 100,
-    }).expect(400)
+    }).expect(409)
 })

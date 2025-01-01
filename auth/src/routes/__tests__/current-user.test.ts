@@ -11,7 +11,7 @@ it('check the current user',async ()=>{
        .send()
        .expect(200)
 
-       expect(responseTwo.body.CurrentUser.email).toBe('test@test.com')
+       expect(responseTwo.body.currentUser.email).toBe('test@test.com')
        
 
 
